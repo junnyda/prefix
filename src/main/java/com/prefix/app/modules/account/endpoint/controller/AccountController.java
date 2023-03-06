@@ -1,11 +1,17 @@
 package com.prefix.app.modules.account.endpoint.controller;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
+
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.prefix.app.modules.account.application.AccountService;
@@ -15,7 +21,7 @@ import com.prefix.app.modules.account.endpoint.controller.validator.SignUpFormVa
 import com.prefix.app.modules.account.infra.repository.AccountRepository;
 import com.prefix.app.modules.account.support.CurrentUser;
 
-import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,6 +30,7 @@ public class AccountController {
     private final AccountService accountService;
     private final SignUpFormValidator signUpFormValidator;
     private final AccountRepository accountRepository;
+    private final JavaMailSender javamailSender;
 
     @InitBinder("signUpForm")
     public void initBinder(WebDataBinder webDataBinder) {

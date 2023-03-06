@@ -1,11 +1,34 @@
 package com.prefix.app.modules.account.endpoint.controller;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prefix.app.modules.account.application.AccountService;
 import com.prefix.app.modules.account.domain.entity.Account;
 import com.prefix.app.modules.account.domain.entity.Zone;
-import com.prefix.app.modules.account.endpoint.controller.form.*;
+import com.prefix.app.modules.account.endpoint.controller.form.NicknameForm;
+import com.prefix.app.modules.account.endpoint.controller.form.NotificationForm;
+import com.prefix.app.modules.account.endpoint.controller.form.PasswordForm;
+import com.prefix.app.modules.account.endpoint.controller.form.Profile;
+import com.prefix.app.modules.account.endpoint.controller.form.TagForm;
+import com.prefix.app.modules.account.endpoint.controller.form.ZoneForm;
 import com.prefix.app.modules.account.endpoint.controller.validator.NicknameFormValidator;
 import com.prefix.app.modules.account.endpoint.controller.validator.PasswordFormValidator;
 import com.prefix.app.modules.account.support.CurrentUser;
@@ -14,18 +37,6 @@ import com.prefix.app.modules.tag.infra.repository.TagRepository;
 import com.prefix.app.modules.zone.infra.repository.ZoneRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor

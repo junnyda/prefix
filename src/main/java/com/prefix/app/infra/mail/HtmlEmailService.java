@@ -11,11 +11,10 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Profile("!local")
-//@Service
-@RequiredArgsConstructor
-@Component
+@Profile("local")
 @Slf4j
+@Component
+@RequiredArgsConstructor
 public class HtmlEmailService implements EmailService {
 
     private final JavaMailSender javaMailSender;
@@ -23,9 +22,8 @@ public class HtmlEmailService implements EmailService {
     @Override
     public void sendEmail(EmailMessage emailMessage) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper;
         try {
-            mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessageHelper.setTo(emailMessage.getTo());
             mimeMessageHelper.setSubject(emailMessage.getSubject());
             mimeMessageHelper.setText(emailMessage.getMessage(), true);

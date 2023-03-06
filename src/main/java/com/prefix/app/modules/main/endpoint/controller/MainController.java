@@ -1,6 +1,5 @@
 package com.prefix.app.modules.main.endpoint.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,6 +14,8 @@ import com.prefix.app.modules.account.support.CurrentUser;
 import com.prefix.app.modules.event.infra.repository.EnrollmentRepository;
 import com.prefix.app.modules.study.domain.entity.Study;
 import com.prefix.app.modules.study.infra.repository.StudyRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor

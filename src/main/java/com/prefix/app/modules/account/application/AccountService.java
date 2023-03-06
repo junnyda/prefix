@@ -1,7 +1,9 @@
 package com.prefix.app.modules.account.application;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,9 +28,8 @@ import com.prefix.app.modules.account.endpoint.controller.form.SignUpForm;
 import com.prefix.app.modules.account.infra.repository.AccountRepository;
 import com.prefix.app.modules.tag.domain.entity.Tag;
 
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +42,7 @@ public class AccountService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final TemplateEngine templateEngine;
     private final AppProperties appProperties;
-
+    
     public Account signUp(SignUpForm signUpForm) {
         Account newAccount = saveNewAccount(signUpForm);
         sendVerificationEmail(newAccount);
@@ -168,4 +169,5 @@ public class AccountService implements UserDetailsService {
         return Optional.ofNullable(accountRepository.findByNickname(nickname))
                 .orElseThrow(() -> new IllegalArgumentException(nickname + "에 해당하는 사용자가 없습니다."));
     }
+    
 }
